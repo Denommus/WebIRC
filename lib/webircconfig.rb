@@ -1,4 +1,3 @@
-require "ftools"
 require "yaml"
 
 class WebIRCConfig
@@ -7,13 +6,13 @@ class WebIRCConfig
   PUBLIC = "#{HOME}/public"
   
   def initialize
-    File.makedirs(HOME) unless File.exists?(HOME)
+    FileUtils.mkdir(HOME) unless File.exists?(HOME)
     raise "Could not create #{HOME}" unless File.exists?(HOME)
     @config = (File.exists?(CONFIG) ? YAML::load(File.open(CONFIG).read) : Hash.new)
   end
   
   def save_file(filename)
-    File.makedirs(PUBLIC) unless File.exists?(PUBLIC)
+    FileUtils.mkdir(PUBLIC) unless File.exists?(PUBLIC)
     raise "Could not create #{PUBLIC}" unless File.exists?(PUBLIC)
     File.open("#{PUBLIC}/#{filename}", "w") {|file| yield file if block_given?}
   end

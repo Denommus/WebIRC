@@ -1,3 +1,4 @@
+$LOAD_PATH.unshift(File.dirname(__FILE__))
 require "lib/webircconfig"
 require "lib/connections"
 require "lib/rss"
